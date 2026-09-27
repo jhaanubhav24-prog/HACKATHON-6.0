@@ -1,0 +1,174 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: #0a0a0a;
+  color: #e5e5e5;
+  font-family: 'Inter', sans-serif;
+  overflow-x: hidden;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-thumb {
+  background: #232323;
+  border-radius: 8px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}
+
+/* Marquee for reviews strip */
+.marquee-track {
+  display: flex;
+  width: max-content;
+  animation: marquee 30s linear infinite;
+}
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+/* Terminal blink cursor */
+.blink-cursor::after {
+  content: '_';
+  animation: blink 1s step-start infinite;
+}
+@keyframes blink {
+  50% { opacity: 0; }
+}
+
+/* Rotating hero ticker line */
+.animate-tickerFade {
+  display: inline-block;
+  animation: tickerFade 0.5s ease;
+}
+@keyframes tickerFade {
+  from { opacity: 0; transform: translateY(4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Slow spin used by the collaboration-page illustration */
+.animate-spin-slow {
+  animation: spin-slow 6s linear infinite;
+}
+@keyframes spin-slow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* Gentle float used by tab illustrations */
+.animate-float {
+  animation: floatY 3s ease-in-out infinite;
+}
+@keyframes floatY {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+}
+
+/* Sequential fade used by layered/stacked illustrations */
+.animate-fadeSeq {
+  animation: fadeSeq 2.4s ease-in-out infinite;
+}
+@keyframes fadeSeq {
+  0%, 100% { opacity: 0.35; }
+  50% { opacity: 1; }
+}
+
+/* Confetti drift for the trophy illustration */
+.animate-confetti {
+  animation: confettiDrift 2.6s ease-in-out infinite;
+}
+@keyframes confettiDrift {
+  0% { transform: translateY(4px); opacity: 0; }
+  40% { opacity: 1; }
+  100% { transform: translateY(-14px); opacity: 0; }
+}
+
+/* Playful wiggle for the "yeh lo dimaag" brain button */
+.animate-wiggle {
+  display: inline-block;
+  animation: wiggle 1.8s ease-in-out infinite;
+}
+@keyframes wiggle {
+  0%, 100% { transform: rotate(0deg); }
+  25% { transform: rotate(-10deg); }
+  75% { transform: rotate(10deg); }
+}
+
+/* Flip-in reveal for the brain card */
+.animate-flipIn {
+  animation: flipIn 0.4s ease-out;
+  transform-origin: top center;
+}
+@keyframes flipIn {
+  from { opacity: 0; transform: rotateX(-25deg) translateY(-8px); }
+  to { opacity: 1; transform: rotateX(0) translateY(0); }
+}
+
+/* Line draw-in reveal for graph paths (pair with pathLength="100") */
+.animate-drawLine {
+  stroke-dasharray: 100;
+  animation: drawLine 1.8s ease-out forwards;
+}
+@keyframes drawLine {
+  from { stroke-dashoffset: 100; }
+  to { stroke-dashoffset: 0; }
+}
+
+/* Slow blink for mascot characters, so they read as "alive" not static art */
+.animate-blink {
+  transform-origin: center;
+  animation: blinkEyes 4.5s ease-in-out infinite;
+}
+@keyframes blinkEyes {
+  0%, 90%, 100% { transform: scaleY(1); }
+  93% { transform: scaleY(0.1); }
+  96% { transform: scaleY(1); }
+}
+
+/* Fade-in for the GraphRider's mood caption. Deliberately opacity-only (no
+   translateY like animate-tickerFade) — the caption is already horizontally
+   centered via a -translate-x-1/2 utility, and a keyframe that sets its own
+   `transform` would overwrite that centering for the animation's duration. */
+.animate-captionFade {
+  animation: captionFade 0.35s ease-out;
+}
+@keyframes captionFade {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* Small persistent nudge on the end-marker of "our course" so the eye lands there */
+.animate-markerPulse {
+  animation: markerPulse 2.2s ease-in-out infinite;
+}
+@keyframes markerPulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.18); }
+}
+
+/* Wrench pulse ring when an offer is available */
+.pulse-ring {
+  position: absolute;
+  inset: -6px;
+  border-radius: 9999px;
+  border: 2px solid rgba(57,255,136,0.6);
+  animation: pulse-ring 1.8s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+@keyframes pulse-ring {
+  0% { transform: scale(0.9); opacity: 0.9; }
+  70% { transform: scale(1.6); opacity: 0; }
+  100% { transform: scale(1.6); opacity: 0; }
+}
